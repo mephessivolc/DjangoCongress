@@ -1,0 +1,294 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+{% load widget_tweaks %}
+
+{% block css %}
+<style>
+span.required::after {
+    content: " *";
+    color: red;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+<div class="container">
+<h1 class="text-center">{{ title }}</h1>
+
+<form action="" method="post">
+    {% csrf_token %}
+
+    <fieldset>
+        <legend>Informações Pessoais</legend>
+
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">
+                <p class="text-danger">{{ error }}</p>
+            </div>
+        {% endfor %}
+
+        <div class="form-group">
+            <label for="{{ form.name.id_for_label }}">
+                {% if form.name.field.required %}
+                    <span class="required">{{ form.name.label }}</span>
+                {% else %}
+                    {{ form.name.label }}
+                {% endif %}
+              </label>
+              {% render_field form.name class='form-control' placeholder=form.name.label %}
+              {% if form.name.errors %}
+                  {% for error in form.name.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+              {% if form.name.help_text %}
+
+                  <span class='help-text'>
+                      <small  class="form-text text-muted">
+                          {{ form.name.help_text }}
+                      </small>
+                  </span>
+              {% endif %}
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+              <label for="{{ form.email.id_for_label }}">
+                  {% if form.email.field.required %}
+                      <span class="required">{{ form.email.label }}</span>
+                  {% else %}
+                      {{ form.email.label }}
+                  {% endif %}
+              </label>
+              {% render_field form.email class='form-control' placeholder=form.email.label %}
+              {% for error in form.email.errors %}
+              <div class="alert alert-danger">
+                  <span>{{ error }}</span>
+              </div>
+              {% endfor %}
+              {% if form.email.errors %}
+                  {% for error in form.email.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+              {% if form.email.help_text %}
+
+                  <span class='help-text'>
+                      <small  class="form-text text-muted">
+                          {{ form.email.help_text }}
+                      </small>
+                  </span>
+              {% endif %}
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="{{ form.cpf.id_for_label }}">
+                {% if form.cpf.field.required %}
+                    <span class="required">{{ form.cpf.label }}</span>
+                {% else %}
+                    {{ form.cpf.label }}
+                {% endif %}
+            </label>
+            {% render_field form.cpf class='form-control' placeholder=form.cpf.label %}
+            {% if form.cpf.errors %}
+                {% for error in form.cpf.errors %}
+                  <div class="alert alert-danger">
+                      <strong>{{ error|escape }}</strong>
+                  </div>
+                  {% endfor %}
+              {% endif %}
+            {% if form.cpf.help_text %}
+
+                <span class='help-text'>
+                    <small  class="form-text text-muted">
+                        {{ form.cpf.help_text }}
+                    </small>
+                </span>
+            {% endif %}
+          </div>
+        </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="{{ form.password1.id_for_label }}">
+                {% if form.password1.field.required %}
+                    <span class="required">{{ form.password1.label }}</span>
+                {% else %}
+                    {{ form.password1.label }}
+                {% endif %}
+            </label>
+            {% render_field form.password1 class='form-control' placeholder=form.password1.label %}
+            {% if form.password1.errors %}
+                {% for error in form.password1.errors %}
+                  <div class="alert alert-danger">
+                      <strong>{{ error|escape }}</strong>
+                  </div>
+                  {% endfor %}
+              {% endif %}
+            {% if form.password1.help_text %}
+
+                <span class='help-text'>
+                    <small  class="form-text text-muted">
+                        {{ form.password1.help_text }}
+                    </small>
+                </span>
+            {% endif %}
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="{{ form.password2.id_for_label }}">
+                  {% if form.password2.field.required %}
+                      <span class="required">{{ form.password2.label }}</span>
+                  {% else %}
+                      {{ form.password2.label }}
+                  {% endif %}
+              </label>
+              {% render_field form.password2 class='form-control' placeholder=form.password2.label %}
+              {% if form.password2.errors %}
+                  {% for error in form.password2.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+              {% if form.password2.help_text %}
+
+                  <span class='help-text'>
+                      <small  class="form-text text-muted">
+                          {{ form.password2.help_text }}
+                      </small>
+                  </span>
+              {% endif %}
+        </div>
+      </div>
+  </fieldset>
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+        <label for="{{ form.ie.id_for_label }}">
+                  {% if form.ie.field.required %}
+                      <span class="required">{{ form.ie.label }}</span>
+                  {% else %}
+                      {{ form.ie.label }}
+                  {% endif %}
+              </label>
+              {% render_field form.ie class='form-control' placeholder=form.ie.label %}
+              {% if form.ie.errors %}
+                  {% for error in form.ie.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+              {% if form.ie.help_text %}
+
+                  <span class='help-text'>
+                      <small  class="form-text text-muted">
+                          {{ form.ie.help_text }}
+                      </small>
+                  </span>
+              {% endif %}
+    </div>
+
+    <div class="form-group col-md-4">
+        <label for="{{ form.course.id_for_label }}">
+          {% if form.course.field.required %}
+              <span class="required">{{ form.course.label }}</span>
+          {% else %}
+              {{ form.course.label }}
+          {% endif %}
+      </label>
+      {% render_field form.course class='form-control' placeholder=form.course.label %}
+      {% if form.course.errors %}
+          {% for error in form.course.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+            {% endfor %}
+        {% endif %}
+      {% if form.course.help_text %}
+
+          <span class='help-text'>
+              <small  class="form-text text-muted">
+                  {{ form.course.help_text }}
+              </small>
+          </span>
+      {% endif %}
+    </div>
+
+    <div class="form-group col-md-4">
+        <label for="{{ form.nivel.id_for_label }}">
+          {% if form.nivel.field.required %}
+              <span class="required">{{ form.nivel.label }}</span>
+          {% else %}
+              {{ form.nivel.label }}
+          {% endif %}
+      </label>
+      {% render_field form.nivel class='form-control' placeholder=form.nivel.label %}
+      {% if form.nivel.errors %}
+          {% for error in form.nivel.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+            {% endfor %}
+        {% endif %}
+      {% if form.nivel.help_text %}
+
+          <span class='help-text'>
+              <small  class="form-text text-muted">
+                  {{ form.nivel.help_text }}
+              </small>
+          </span>
+      {% endif %}
+    </div>
+</div>
+<div class='row'>
+      <div class="form-group col-md-2">
+          <label for="{{ form.tshirt.id_for_label }}">
+                  {% if form.tshirt.field.required %}
+                      <span class="required">{{ form.tshirt.label }}</span>
+                  {% else %}
+                      {{ form.tshirt.label }}
+                  {% endif %}
+              </label>
+              {% render_field form.tshirt class='form-control' placeholder=form.tshirt.label %}
+              {% if form.tshirt.errors %}
+                  {% for error in form.tshirt.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+              {% if form.tshirt.help_text %}
+
+                  <span class='help-text'>
+                      <small  class="form-text text-muted">
+                          {{ form.tshirt.help_text }}
+                      </small>
+                  </span>
+              {% endif %}
+      </div>
+  </div>
+
+  <input type="submit" class="btn btn-primary" name="" value="{{ title }}">
+  <a href="{% url 'core:index' %}"><button type="button" class="btn btn-secondary">Voltar</button></a>
+</form>
+</div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{% static 'js/jquery-1.2.6.pack.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.maskedinput-1.1.4.pack.js' %}"/></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#id_cpf").mask("999.999.999-99");
+	});
+</script>
+{% endblock %}
