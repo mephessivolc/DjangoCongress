@@ -4,7 +4,7 @@ Inicialmente foi feito o repositório para a aplicação de controladoria do eve
 Evento que ocorre no segundo semestre de cada ano, normalmente no fim de outubro, e que visa promover as discussões em torno da pesquisa e prática
 docente.
 
-Com a evolução do projeto, objetivou construir uma aplicação para utilizar em todos os eventos cientificos da universidade quanto para outras
+Com a evolução do projeto, objetivou construir uma aplicação para ser utilizada em outros eventos cientificos da universidade quanto para outras
 instituições.
 
 Sinta-se a vontade para melhorar o projeto, ou usá-lo. Lembre-se Grandes poderes, vem com grandes responsabilidades (Ben, Tio. 2001).
