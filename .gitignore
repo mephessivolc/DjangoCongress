@@ -1,0 +1,11 @@
+update_requirements.sh
+db.sqlite3
+.env
+
+devDjangoEvent/
+
+__pycache__/
+migrations/
+staticfiles/
+
+.mypy_cache/
