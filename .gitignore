@@ -2,7 +2,7 @@ update_requirements.sh
 db.sqlite3
 .env
 
-devDjangoEvent/
+devDjangoCongress/
 
 __pycache__/
 migrations/
