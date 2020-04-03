@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+from django.contrib.messages import constants as messages_constants
+
 from decouple import config, Csv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -129,3 +131,27 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# E-mail
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # para aparecer o email no console/shell
+EMAIL_HOST = ''
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+DEFAULT_FROM_EMAIL = 'admin@djangocongress.com'
+
+# auth
+LOGIN_URL = 'users:login'
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_URL = 'users.logout'
+AUTH_USER_MODEL = 'users.Users'
+
+# messages
+MESSAGE_TAGS = {
+    messages_constants.DEBUG: 'primary',
+    messages_constants.INFO: 'info',
+    messages_constants.SUCCESS: 'success',
+    messages_constants.WARNING: 'warning',
+    messages_constants.ERROR: 'danger',
+}

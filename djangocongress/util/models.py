@@ -10,7 +10,7 @@ class LuckyNumber(models.Model):
         Numero para eventuais sorteios
     """
 
-    user = models.OneToOneField(User, verbose_name="Usuario")
+    user = models.OneToOneField(User, verbose_name="Usuario", on_delete=models.CASCADE)
     number = models.CharField("Numero da sorte", max_length=3)
 
     class Meta:
