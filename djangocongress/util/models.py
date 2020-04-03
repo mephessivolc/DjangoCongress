@@ -17,5 +17,5 @@ class LuckyNumber(models.Model):
         verbose_name = "Numero da Sorte"
         verbose_name_plural = "Sorteios"
 
-    class __str__(self):
+    def __str__(self):
         return "{}".format(user.name)
