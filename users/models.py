@@ -95,11 +95,8 @@ class Users(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.name or self.email
 
-    def get_full_name(self):
-        return self.name or self.username
-
     def get_short_name(self):
-        return self.get_full_name() #self.name.split()[0] or self.username
+        return "{}".format(self.name.split()[0] or self.username)
 
     def save(self, **kwargs):
         if not self.username:
