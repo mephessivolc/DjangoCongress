@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'minicourses',
     'users',
     'util',
-    'tshirts',
+    'shirts',
 ]
 
 MIDDLEWARE = [
