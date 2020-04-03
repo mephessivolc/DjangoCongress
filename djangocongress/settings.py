@@ -45,7 +45,7 @@ INSTALLED_APPS = [
 
     # apps #
     'djangocongress.core',
-    'djangocongress.minicourse',
+    'djangocongress.minicourses',
     'djangocongress.users',
     'djangocongress.util',
 ]
