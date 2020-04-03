@@ -42,6 +42,12 @@ INSTALLED_APPS = [
 
     # Libs #
     'rest_framework',
+
+    # apps #
+    'core',
+    'minicourse',
+    'users',
+    'util',
 ]
 
 MIDDLEWARE = [
