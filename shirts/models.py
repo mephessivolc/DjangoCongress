@@ -14,7 +14,7 @@ class Shirts(models.Model):
         verbose_name_plural = 'Camisas'
 
     def __str__(self):
-        return self.tshirt_type
+        return "{} - {} ({})".format(self.shirt_size, self.shirt_type, self.color)
 
 class RequestShirts(models.Model):
     shirt = models.ForeignKey(Shirts, verbose_name='Camisa', on_delete=models.CASCADE)
@@ -24,7 +24,7 @@ class RequestShirts(models.Model):
     class Meta:
         verbose_name = "Relação de pedido"
         verbose_name_plural = "Relações de Pedidos"
-    
+
 
     def __str__(self):
         return "{} - {}".format(self.shirt, self.quantity)
