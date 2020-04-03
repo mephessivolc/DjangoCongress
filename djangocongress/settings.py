@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'djangocongress.minicourses',
     'djangocongress.users',
     'djangocongress.util',
+    'djangocongress.tshirts',
 ]
 
 MIDDLEWARE = [
