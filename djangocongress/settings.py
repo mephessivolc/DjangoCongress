@@ -46,11 +46,11 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # apps #
-    'djangocongress.core',
-    'djangocongress.minicourses',
-    'djangocongress.users',
-    'djangocongress.util',
-    'djangocongress.tshirts',
+    'core',
+    'minicourses',
+    'users',
+    'util',
+    'tshirts',
 ]
 
 MIDDLEWARE = [
