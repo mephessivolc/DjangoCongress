@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'widget_tweaks',
 
     # apps #
-    'congress',
     'core',
     'minicourses',
     'users',
