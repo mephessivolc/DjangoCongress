@@ -10,6 +10,10 @@ class TypeCongress(models.Model):
     """
     type_congress = models.CharField('Tipo de Congresso', max_length=50)
 
+    class Meta:
+        verbose_name = 'Tipo de Evento'
+        verbose_name_plural = 'Tipos de Evento'
+
     def __str__(self):
         return self.type_congress
 
@@ -20,6 +24,7 @@ class Congress(models.Model):
 
     username = models.CharField('Apelido do evento', max_length=20)
     name = models.CharField('Nome do Evento', max_length=100)
+    type_congress = models.ForeignKey(TypeCongress, verbose_name='Tipo do evento', on_delete=models.CASCADE)
     date_start_subscription = models.DateTimeField("Data/Hora para iniciar inscrições", auto_now=True)
     date_start_congress = models.DateTimeField("Data/Hora para iniciar primeiro dia", auto_now=True)
     date_close_subscription = models.DateTimeField("Data/Hora para finalizar o recebimento das inscrições", auto_now=True)
@@ -38,8 +43,8 @@ class Subscriptions(models.Model):
     """
         Inscritos
     """
-    congress = models.ForeignKey(Congress, verbose_name='Congresso')
-    user = models.ForeignKey(Users, verbose_name='Usuario inscrito')
+    congress = models.ForeignKey(Congress, verbose_name='Congresso', on_delete=models.CASCADE)
+    user = models.ForeignKey(Users, verbose_name='Usuario inscrito', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Inscrição'
