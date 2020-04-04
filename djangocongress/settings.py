@@ -44,8 +44,10 @@ INSTALLED_APPS = [
 
     # Libs #
     'rest_framework',
+    'widget_tweaks',
 
     # apps #
+    'congress',
     'core',
     'minicourses',
     'users',
