@@ -15,7 +15,7 @@ class Minicourses(models.Model):
     """
 
     congress = models.ForeignKey(Congress, verbose_name='Evento', on_delete=models.CASCADE)
-    teacher = models.Foreing(Users, verbose_name='Palestrante', on_delete=models.CASCADE)
+    teacher = models.ForeignKey(Users, verbose_name='Palestrante', on_delete=models.CASCADE)
     name = models.CharField('Nome', max_length=100, default='')
     description = models.TextField('Descrição', default='')
     quantity_places = models.CharField('Quantidade de Vagas', max_length=2, default='30')
