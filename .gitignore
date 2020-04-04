@@ -1,6 +1,7 @@
 update_requirements.sh
 db.sqlite3
 .env
+.bak
 
 devDjangoCongress/
 
