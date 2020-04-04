@@ -9,6 +9,7 @@ from localflavor.br.models import BRCPFField, BRCNPJField
 
 from .manager import CustomUserManager
 
+from shirts.models import Shirts
 # Create your models here.
 
 ie_choices = (
@@ -29,19 +30,6 @@ nivel_choices = (
         ('POS', "Estudante de Pós-Graduação"),
         ('PROF', "Professor de Ensino Básico"),
         ("PRSUP", "Professor de Ensino Superior"),
-    )
-
-tshirt_choices = (
-        ('PP Fem', 'PP Fem'),
-        ('P Fem', 'P Fem'),
-        ('M Fem', 'M Fem'),
-        ('G Fem', 'G Fem'),
-        ('GG Fem', 'GG Fem'),
-        ('PP Masc', 'PP Masc'),
-        ('P Masc', 'P Masc'),
-        ('M Masc', 'M Masc'),
-        ('G Masc', 'G Masc'),
-        ('GG Masc', 'GG Masc'),
     )
 
 
@@ -75,9 +63,7 @@ class Users(AbstractBaseUser, PermissionsMixin):
     ie = models.CharField('Instituição de Ensino', max_length=7, choices=ie_choices, default='UEMASUL')
     course = models.CharField('Curso', max_length=3, choices=curse_choices, default='MAT')
     nivel = models.CharField('Atuação', max_length=5, choices=nivel_choices, default='GRAD')
-    tshirt = models.CharField('Tamanho Camisa', max_length=8, choices=tshirt_choices,
-        blank=True, null=True, default=''
-    )
+    tshirt = models.ForeignKey(Shirts, verbose_name='Camisa', on_delete=models.DO_NOTHING)
 
     monitor = models.CharField('Monitor', max_length=150, default="", blank=True, null=True)
     date_joined = models.DateTimeField("Data de Entrada", auto_now_add=True)
