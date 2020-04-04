@@ -1,30 +1,56 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
-from django.utils import timezone
 # Create your models here.
+Users = get_user_model()
 
-class CoreModels(models.Model):
-
+class TypeCongress(models.Model):
     """
-        Modelo de Banco de dados para as datas principais do sistema
-
-        date_start_subscription : Data para iniciar as inscrições no sistema
-        data_start_event : Data que irá iniciar o evento
-        data_end_subscription : Ultimo dia para fazer inscrições com kits de inscrição
-        data_end_event : Data final do evento e inicio do recebimento dos certificados
-        data_end_all : Data final de recebimento de certificados e finalização do sistema
-
-        data_end_minicourse : Data e hora para finalização de inscrições em minicursos
+        Armazena tipo de congressos, exemplo: Colóquio, Simpósios, Semana de Estudos, entre outros
     """
-
-    date_start_subscription = models.DateField('Data início inscrição', default=timezone.now)
-    data_start_event = models.DateField('Data inicio evento', default=timezone.now)
-    data_end_subscription = models.DateField('Data finalização inscrição', default=timezone.now)
-    data_end_event = models.DateField('Data final do evento', default=timezone.now)
-    data_end_all = models.DateField('Data final do sistema', default=timezone.now)
-
-    data_end_minicourse = models.DateTimeField('Data finalização para Minicurso', default=timezone.now)
+    type_congress = models.CharField('Tipo de Congresso', max_length=50)
 
     class Meta:
-        verbose_name = 'Principal'
-        verbose_name_plural = 'Principais'
+        verbose_name = 'Tipo de Evento'
+        verbose_name_plural = 'Tipos de Evento'
+
+    def __str__(self):
+        return self.type_congress
+
+class Congress(models.Model):
+    """
+        Dados essenciais dos Congressos
+    """
+
+    username = models.CharField('Apelido do evento', max_length=20, blank=True, null=True)
+    name = models.CharField('Nome do Evento', max_length=100)
+    type_congress = models.ForeignKey(TypeCongress, verbose_name='Tipo do evento', on_delete=models.CASCADE)
+    date_start_subscription = models.DateTimeField("Data/Hora para iniciar inscrições", auto_now=True)
+    date_start_congress = models.DateTimeField("Data/Hora para iniciar primeiro dia", auto_now=True)
+    date_close_subscription = models.DateTimeField("Data/Hora para finalizar o recebimento das inscrições", auto_now=True)
+    date_close_congress = models.DateTimeField("Data/hora da finalização do evento", auto_now=True)
+    date_close_awards = models.DateTimeField("Data/hora finalizar inscrições com premiação", auto_now=True)
+
+    class Meta:
+        verbose_name = 'Congresso'
+        verbose_name_plural = 'Congressos'
+
+    def __str__(self):
+        return self.name
+
+class Subscriptions(models.Model):
+
+    """
+        Inscritos
+    """
+    congress = models.ForeignKey(Congress, verbose_name='Congresso', on_delete=models.CASCADE)
+    user = models.ForeignKey(Users, verbose_name='Usuario inscrito', on_delete=models.CASCADE)
+    is_staff = models.BooleanField('Monitor', default=False)
+    is_payment = models.BooleanField('Pagamento', default=False)
+
+    class Meta:
+        verbose_name = 'Inscrição'
+        verbose_name_plural = 'Inscrições'
+
+    def __str__(self):
+        return "{} ({})".format(self.user.name, self.congress.name)

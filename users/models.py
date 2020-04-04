@@ -8,35 +8,12 @@ from django.db import models
 from localflavor.br.models import BRCPFField, BRCNPJField
 
 from .manager import CustomUserManager
-
-from shirts.models import Shirts
 # Create your models here.
-
-ie_choices = (
-        ('UEMASUL', 'UEMASUL'),
-        ('UEMA', 'UEMA'),
-        ('IFMA', 'IFMA'),
-        ('OUTRO', 'OUTROS'),
-    )
-
-curse_choices = (
-        ('MAT', "Licenciatura em Matemática"),
-        ('FIS', "Licenciatura em Física"),
-        ('OUT', "Outro"),
-    )
-
-nivel_choices = (
-        ('GRAD', "Estudante de Graduação"),
-        ('POS', "Estudante de Pós-Graduação"),
-        ('PROF', "Professor de Ensino Básico"),
-        ("PRSUP", "Professor de Ensino Superior"),
-    )
-
 
 class Users(AbstractBaseUser, PermissionsMixin):
 
     """
-
+        Usuarios do sistema
     """
 
     username = models.CharField(
@@ -55,17 +32,10 @@ class Users(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField('Email', unique=True)
 
     is_staff = models.BooleanField('Equipe', default=False)
-    is_student = models.BooleanField('Estudante', default=True)
     is_active = models.BooleanField('Ativo', default=True)
-    is_payment = models.BooleanField('Pagamento', default=False)
 
     cpf = BRCPFField('CPF', unique=True, help_text='Somente Números')
-    ie = models.CharField('Instituição de Ensino', max_length=7, choices=ie_choices, default='UEMASUL')
-    course = models.CharField('Curso', max_length=3, choices=curse_choices, default='MAT')
-    nivel = models.CharField('Atuação', max_length=5, choices=nivel_choices, default='GRAD')
-    tshirt = models.ForeignKey(Shirts, verbose_name='Camisa', on_delete=models.DO_NOTHING)
 
-    monitor = models.CharField('Monitor', max_length=150, default="", blank=True, null=True)
     date_joined = models.DateTimeField("Data de Entrada", auto_now_add=True)
 
     USERNAME_FIELD = 'username'

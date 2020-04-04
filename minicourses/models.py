@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from core.models import Congress
+
 Users = get_user_model()
 
 class Minicourses(models.Model):
@@ -12,7 +14,8 @@ class Minicourses(models.Model):
         quantity_places : Quantidade de vagas disponíveis
     """
 
-    teacher = models.OneToOneField(Users, verbose_name='Palestrante', on_delete=models.CASCADE)
+    congress = models.ForeignKey(Congress, verbose_name='Evento', on_delete=models.CASCADE)
+    teacher = models.Foreing(Users, verbose_name='Palestrante', on_delete=models.CASCADE)
     name = models.CharField('Nome', max_length=100, default='')
     description = models.TextField('Descrição', default='')
     quantity_places = models.CharField('Quantidade de Vagas', max_length=2, default='30')
@@ -25,7 +28,7 @@ class Minicourses(models.Model):
     def __str__(self):
         return self.name
 
-class Subscribe(models.Model):
+class SubscribeMinicourses(models.Model):
     """
         Modelo de Banco de dados para registros de Inscrições
 
