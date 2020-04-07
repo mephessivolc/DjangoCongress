@@ -21,4 +21,4 @@ class LuckyNumber(models.Model):
         verbose_name_plural = "Sorteios"
 
     def __str__(self):
-        return "{}".format(user.name)
+        return "({}) {}".format(self.congress, self.user)
