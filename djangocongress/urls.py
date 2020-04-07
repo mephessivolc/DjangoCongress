@@ -22,6 +22,7 @@ urlpatterns = [
     path('camisas/', include("shirts.urls")),
     path('cursos/', include('courses.urls')),
     path('minicursos/', include('minicourses.urls')),
+    path('contas/', include('users.urls')),
     path('', include('core.urls')),
-    path('usuario/', include('users.urls')),
+    # path('usuario/', include('users.urls')),
 ]

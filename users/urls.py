@@ -1,9 +1,17 @@
 from django.urls import path
+from django.conf.urls import include
 
 from . import views
+from rest_framework import routers
+
+from .api_rest.viewsets import UsersViewsets
+
+router = routers.DefaultRouter()
+router.register(r'contas', UsersViewsets)
 
 app_name = 'users'
 urlpatterns = [
+    path('api_rest/', include(router.urls))
     # path('cadastrar/', views.CreateUsers.as_view(), name='create_user'),
     # path('entrar/', views.LoginUsers.as_view(), name='login'),
     # path('sair/', views.LogoutUsers.as_view(), name='logout'),
