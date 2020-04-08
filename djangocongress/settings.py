@@ -151,7 +151,7 @@ DEFAULT_FROM_EMAIL = 'admin@djangocongress.com'
 
 # auth
 LOGIN_URL = 'users:login'
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'core:index'
 LOGOUT_URL = 'users.logout'
 AUTH_USER_MODEL = 'users.Users'
 
