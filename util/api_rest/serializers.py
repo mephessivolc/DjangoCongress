@@ -6,4 +6,4 @@ class LuckyNumberSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = LuckyNumber
-        fields = ['congress', 'user', 'number']
+        fields = ['congress', 'number', 'user']
