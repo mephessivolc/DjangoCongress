@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block content %}
+<form class="" action="" method="post">
+    {% csrf_token %}
+
+    {{ form.as_table }}
+
+    <input type="submit" name="cad" value="Cadastrar">
+
+
+</form>
+{% endblock %}

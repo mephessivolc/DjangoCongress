@@ -20,10 +20,10 @@ class UserAdminCreateForm(UserCreationForm):
 
     class Meta:
         model = Users
-        fields = ['name', 'email', 'cpf', 'ie', 'course', 'nivel', 'tshirt']
+        fields = ['name', 'email', 'cpf']
 
 class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Users
-        fields = ['name', 'email', 'cpf', 'ie', 'course', 'nivel']
+        fields = ['name', 'email', 'cpf']

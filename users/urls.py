@@ -11,12 +11,13 @@ router.register(r'contas', UsersViewsets)
 
 app_name = 'users'
 urlpatterns = [
-    path('api_rest/', include(router.urls))
-    # path('cadastrar/', views.CreateUsers.as_view(), name='create_user'),
-    # path('entrar/', views.LoginUsers.as_view(), name='login'),
-    # path('sair/', views.LogoutUsers.as_view(), name='logout'),
-    # path('atualizar/senha/', views.UpdatePasswordUserView.as_view(), name='update_password'),
-    # path('atualizar/cadastro/', views.UpdateUserView.as_view(), name='update_user'),
+    path('', views.IndexView.as_view(), name='index'),
+    path('api_rest/', include(router.urls)),
+    path('cadastrar/', views.CreateUsersView.as_view(), name='create'),
+    path('entrar/', views.LoginUsersView.as_view(), name='login'),
+    path('sair/', views.LogoutUsersView.as_view(), name='logout'),
+    path('atualizar/cadastro/', views.UpdateUsersView.as_view(), name='update'),
+    path('atualizar/senha/', views.UpdatePasswordView.as_view(), name='update_password'),
 
     # export csv
     # path('exportar/csv', views.UserCSVNameList.as_view(), name='csv_user_name_export'),
@@ -29,8 +30,8 @@ urlpatterns = [
     # path('exportar/inscritos_nao_pagos/pdf', views.UserPDFNameNoSubscribedList.as_view(), name='pdf_user_no_subscribed_export'),
 
     # password treatment
-    # path('esqueci_minha_senha/', views.PasswordUserResetView.as_view(), name='password_reset'),
-    # path('esqueci_minha_senha/enviado/', views.PasswordUserResetDoneView.as_view(), name='password_reset_done'),
-    # path('esqueci_minha_senha/<uidb64>/<token>/', views.PasswordUserResetConfirmView.as_view(), name='password_reset_confirm'),
-    # path('esqueci_minha_senha/completo/', views.PasswordUserResetCompleteView.as_view(), name="password_reset_complete"),
+    path('esqueci_minha_senha/', views.PasswordResetView.as_view(), name='password_reset'),
+    path('esqueci_minha_senha/enviado/', views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('esqueci_minha_senha/<uidb64>/<token>/', views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('esqueci_minha_senha/completo/', views.PasswordResetCompleteView.as_view(), name="password_reset_complete"),
 ]
