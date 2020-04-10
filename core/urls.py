@@ -15,5 +15,6 @@ app_name = 'core'
 urlpatterns = [
     path('api_rest/', include(router.urls)),
     path('', views.Index.as_view(), name='index'),
-    path('listas/', views.ListView.as_view(), name='list'),
+    path('evento/', views.CongressCreateView.as_view(), name='create_congress'),
+    path('tipo_evento/', views.TypeCongressCreateView.as_view(), name='create_type_congress'),
 ]
