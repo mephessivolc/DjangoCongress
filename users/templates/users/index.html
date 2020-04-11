@@ -1,6 +1,6 @@
 {% extends 'core/base.html' %}
 
-{% block content %}
+{% block contents %}
     <p><a href="{% url 'users:create' %}">Cadastrar</a> </p>
     {% if request.user.is_authenticated %}
         <p><a href="{% url 'users:update' %}">Atualizar</a> </p>
