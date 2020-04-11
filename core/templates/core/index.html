@@ -1,19 +1,14 @@
 {% extends 'core/base.html' %}
 
-{% block content %}
+{% block contents %}
 <table>
     <tr>
         <td><a href="{% url 'users:index' %}">Contas</a></td>
     </tr>
 
     <tr>
-        <td>Evento</td>
+        <td><a href="{% url 'core:congress_index' %}">Evento</a></td>
     </tr>
-    <tr>
-        <td><a href="{% url 'core:create_congress' %}">Criar Evento</a></td>
-    </tr>
-    <tr>
-        <td><a href="{% url 'core:create_type_congress' %}">Criar Tipo de Evento</a></td>
-    </tr>
+
 </table>
 {% endblock %}
