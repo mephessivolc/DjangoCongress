@@ -86,11 +86,12 @@ class CongressAdmin(models.Model):
     class Meta:
         verbose_name = 'Administrador do Evento'
         verbose_name_plural = "Administradores do Evento"
+        permissions = [('core.congress.change_congress', "Can Change Congress")]
 
     def __str__(self):
         return "({}/{}) {}".format(self.congress.username, self.congress.date_close_congress.strftime("%Y"), self.user)
 
-        
+
 class Subscriptions(models.Model):
 
     """
