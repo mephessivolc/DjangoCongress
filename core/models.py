@@ -65,6 +65,8 @@ class Congress(models.Model):
     date_close_congress = models.DateTimeField("Data/hora da finalização do evento", auto_now=True)
     date_close_awards = models.DateTimeField("Data/hora finalizar inscrições com premiação", auto_now=True)
 
+    is_closed = models.BooleanField('Está fechado?', default=False)
+
     class Meta:
         verbose_name = 'Congresso'
         verbose_name_plural = 'Congressos'
@@ -72,6 +74,23 @@ class Congress(models.Model):
     def __str__(self):
         return self.name
 
+class CongressAdmin(models.Model):
+    """
+        Cadastro de Sub-Administradores do Congresso. Sub-Administradores sao usuarios que podem atualizar dados do
+        congresso enquanto este permanece em periodo ativo.
+    """
+
+    user = models.ForeignKey(Users, verbose_name='Administrador do Evento', on_delete=models.DO_NOTHING)
+    congress = models.ForeignKey(Congress, verbose_name='Congresso', on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'Administrador do Evento'
+        verbose_name_plural = "Administradores do Evento"
+
+    def __str__(self):
+        return "({}/{}) {}".format(self.congress.username, self.congress.date_close_congress.strftime("%Y"), self.user)
+
+        
 class Subscriptions(models.Model):
 
     """
