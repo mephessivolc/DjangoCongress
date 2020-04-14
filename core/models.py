@@ -48,6 +48,9 @@ class Courses(models.Model):
         verbose_name = 'Curso'
         verbose_name_plural = 'Cursos'
 
+    def get_readable_choices(self):
+        return dict(modal_choices)[self.modal]
+
     def __str__(self):
         return "{} - {} ({})".format(self.name, self.modal, self.institute.username)
 
