@@ -33,8 +33,8 @@ class Institute(models.Model):
     name = models.CharField('Nome da Unidade de Ensino', max_length=100)
 
     class Meta:
-        verbose_name = 'Unidade de Ensino'
-        verbose_name_plural = 'Unidades de Ensino'
+        verbose_name = 'Instituição de Ensino'
+        verbose_name_plural = 'Instituições de Ensino'
 
     def __str__(self):
         return self.name
