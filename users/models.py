@@ -1,9 +1,11 @@
 import re
+import unicodedata
 import uuid
 
 from django.contrib.auth.models import AbstractBaseUser, UserManager, PermissionsMixin
 from django.core import validators
 from django.db import models
+from django.urls import reverse
 
 from localflavor.br.models import BRCPFField, BRCNPJField
 
@@ -28,7 +30,7 @@ class Users(AbstractBaseUser, PermissionsMixin):
         ], help_text='Um nome curto que será usado para identificá-lo de forma única na plataforma',
         default='',
     )
-    
+
     name = models.CharField('Nome', max_length=150, default='', validators=[
         validators.RegexValidator(re.compile('[^\W\d_]+$', re.UNICODE),
         'Digite um nome válido (somente letras)',
@@ -58,6 +60,22 @@ class Users(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         return "{}".format(self.name.split()[0] or self.username)
+
+    def get_create_url(self):
+        return reverse('users:create')
+
+    def get_update_url(self):
+        return reverse('users:update', kwargs={'slug': self.username})
+
+    def get_unicode_name(self):
+        # Unicode normalize transforma um caracter em seu equivalente em latin.
+        nfkd = unicodedata.normalize('NFKD', self.name)
+        title_unicode = u"".join([c for c in nfkd if not unicodedata.combining(c)])
+
+        # Usa expressão regular para retornar a palavra apenas com números, letras e espaço
+        title_unicode = re.sub('[^a-zA-Z0-9 \\\]', '', title_unicode)
+        # title_unicode = title_unicode.replace(' ', '_')
+        return title_unicode
 
     def save(self, **kwargs):
         if not self.username:
