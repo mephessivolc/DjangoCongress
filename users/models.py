@@ -28,7 +28,12 @@ class Users(AbstractBaseUser, PermissionsMixin):
         ], help_text='Um nome curto que será usado para identificá-lo de forma única na plataforma',
         default='',
     )
-    name = models.CharField('Nome', max_length=150, default='')
+    
+    name = models.CharField('Nome', max_length=150, default='', validators=[
+        validators.RegexValidator(re.compile('[^\W\d_]+$', re.UNICODE),
+        'Digite um nome válido (somente letras)',
+        'invalido')
+    ])
     email = models.EmailField('Email', unique=True)
 
     is_staff = models.BooleanField('Equipe', default=False)
