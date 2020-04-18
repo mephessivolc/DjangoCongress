@@ -44,13 +44,14 @@ INSTALLED_APPS = [
     'django.contrib.admin',
 
     # Libs #
-    'rest_framework',
-    'widget_tweaks',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
+    'rest_framework',
+    'widget_tweaks',
+    'qr_code',
 
     # apps #
     'core',
