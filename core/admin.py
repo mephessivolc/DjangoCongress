@@ -1,12 +1,41 @@
 from django.contrib import admin
 
+from django.contrib import admin
 # Register your models here.
-from .models import TypeCongress, Congress, Subscriptions, Courses, Institute, CongressAdmin
+from .models import (TypeCongress, Congress, Subscriptions,
+    Courses, Institute, AdminCongress, ImagesCongress
+)
+
+from .forms import CongressCreateUpdateForm, CongressForm
+
+class CongressAdminSite(admin.ModelAdmin):
+    add_form = CongressCreateUpdateForm
+    add_fieldsets = (
+        (None, {
+            'fields': ('username', 'name', 'type_congress'),
+        }),
+    )
+
+    form = CongressForm
+    fieldsets = (
+        (None, {
+            'fields': ('username', 'name', 'type_congress'),
+        }),
+        ("Informações", {
+            'fields': ('is_closed',),
+        }),
+        ('Datas/Hora', {
+            'fields': ('date_start_subscription', 'date_start_congress',
+                'date_close_awards', 'date_close_subscription',
+                'date_close_congress'),
+        }),
+    )
 
 admin.site.site_header = "Admintração DjangoCongress"
 admin.site.register(TypeCongress)
 admin.site.register(Subscriptions)
-admin.site.register(Congress)
-admin.site.register(CongressAdmin)
+admin.site.register(Congress, CongressAdminSite)
+admin.site.register(AdminCongress)
 admin.site.register(Courses)
 admin.site.register(Institute)
+admin.site.register(ImagesCongress)

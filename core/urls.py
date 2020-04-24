@@ -14,5 +14,6 @@ router.register(r'inscricao', SubscriptionsViewsets)
 app_name = 'core'
 urlpatterns = [
     path('api_rest/', include(router.urls)),
+    path('imagens/<slug>', )
 
 ]
