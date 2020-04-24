@@ -57,7 +57,6 @@ INSTALLED_APPS = [
     'core',
     'minicourses',
     'users',
-    'util',
     'shirts',
 ]
 
@@ -140,6 +139,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'statics')
+MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'statics'),)
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
