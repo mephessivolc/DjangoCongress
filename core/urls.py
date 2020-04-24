@@ -14,6 +14,7 @@ router.register(r'inscricao', SubscriptionsViewsets)
 app_name = 'core'
 urlpatterns = [
     path('api_rest/', include(router.urls)),
-    path('imagens/<slug>', )
+    path('imagens/', views.ImagesCongressListView.as_view(), name='images_list'),
+    path('imagens/<pk>', views.ImagesCongressDetailView.as_view(), name="images_detail"),
 
 ]

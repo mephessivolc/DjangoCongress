@@ -3,6 +3,7 @@ import uuid
 
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.urls import reverse
 from django.utils import timezone
 
 from .utils import UploadToPathAndRename
@@ -129,7 +130,7 @@ class Subscriptions(models.Model):
 
 class ImagesCongress(models.Model):
     congress = models.OneToOneField(Congress, on_delete=models.CASCADE)
-    image = models.ImageField("Logo", default="media/default.png", upload_to=UploadToPathAndRename('congress/logo/'))
+    image = models.ImageField("Logo", default="default.png", upload_to=UploadToPathAndRename('congress/logo/'))
 
     class Meta:
         verbose_name = 'Logo'
@@ -137,6 +138,9 @@ class ImagesCongress(models.Model):
 
     def __str__(self):
         return "{} ({})".format(self.congress.username, self.congress.date_start_congress.strftime("%m/%Y"))
+
+    def get_detail_url(self):
+        return reverse("core:images_detail", kwargs={'pk': self.pk})
 
 class LuckyNumber(models.Model):
     """

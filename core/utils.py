@@ -4,13 +4,11 @@ import uuid
 from django.conf import settings
 from django.utils.deconstruct import deconstructible
 
-
-
 @deconstructible
 class UploadToPathAndRename(object):
 
     def __init__(self, path):
-        self.sub_path = os.path.join(settings.MEDIA_ROOT, path)
+        self.sub_path = path
 
     def __call__(self, instance, filename):
         # ext = filename.split('.')[-1]

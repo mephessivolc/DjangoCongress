@@ -9,7 +9,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth import mixins
 
 from .forms import CongressCreateUpdateForm, TypeCongressCreateUpdateForm
-from .models import Congress, TypeCongress
+from . import models
 # Create your views here.
 
 class Index(TemplateView):
@@ -21,7 +21,7 @@ class CongressIndex(LoginView, TemplateView):
 class CongressCreateView(LoginView, CreateView):
     template_name = 'core/create.html'
     form_class = CongressCreateUpdateForm
-    model = Congress
+    model = models.Congress
     success_url = reverse_lazy('core:index')
 
     def get_success_url(self):
@@ -32,7 +32,7 @@ class CongressCreateView(LoginView, CreateView):
 class CongressUpdateView(LoginView, UpdateView):
     template_name = 'core/update.html'
     form_class = CongressCreateUpdateForm
-    model = Congress
+    model = models.Congress
     success_url = reverse_lazy('core:index')
 
     def get_success_url(self):
@@ -42,8 +42,15 @@ class CongressUpdateView(LoginView, UpdateView):
 
 class CongressListView(LoginView, ListView):
     template_name = 'core/list.html'
-    queryset = Congress.objects.all()
+    queryset = models.Congress.objects.all()
 
 class CongressDetailView(LoginView, DetailView):
     template_name = 'core/detail.html'
-    
+
+class ImagesCongressListView(LoginView, ListView):
+    model = models.ImagesCongress
+    template_name = 'core/images_list.html'
+
+class ImagesCongressDetailView(LoginView, DetailView):
+    model = models.ImagesCongress
+    template_name = 'core/images_detail.html'
