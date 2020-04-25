@@ -1,6 +1,8 @@
 import os
 import uuid
 
+from PIL import Image
+
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
@@ -130,17 +132,34 @@ class Subscriptions(models.Model):
 
 class ImagesCongress(models.Model):
     congress = models.OneToOneField(Congress, on_delete=models.CASCADE)
-    image = models.ImageField("Logo", default="default.png", upload_to=UploadToPathAndRename('congress/logo/'))
+    logo = models.ImageField("Logo", default="default.png", upload_to=UploadToPathAndRename('congress/logo/'))
+    certificate = models.ImageField("Certificado", default="certificate.png", upload_to=UploadToPathAndRename('congress/certificates/'))
 
     class Meta:
-        verbose_name = 'Logo'
-        verbose_name_plural = 'Logos'
+        verbose_name = 'Imagem'
+        verbose_name_plural = 'Imagens'
 
     def __str__(self):
         return "{} ({})".format(self.congress.username, self.congress.date_start_congress.strftime("%m/%Y"))
 
     def get_detail_url(self):
         return reverse("core:images_detail", kwargs={'pk': self.pk})
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        img_logo = Image.open(self.logo.path)
+        img_cert = Image.open(self.certificate.path)
+
+        if img_logo.height > 300 or img_logo.width > 300:
+            output_size = (300,300)
+            img_logo.thumbnail(output_size)
+            img_logo.save(self.logo.path)
+
+        if img_cert.height != 2480 or img_cert.width != 3508:
+            output_size = (2480, 3508)
+            img_cert.thumbnail(output_size)
+            img_cert.save(self.certificate.path)
 
 class LuckyNumber(models.Model):
     """
