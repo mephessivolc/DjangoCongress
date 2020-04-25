@@ -134,6 +134,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+USE_THOUSAND_SEPARATOR = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -146,6 +147,7 @@ MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, 'statics'),)
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 
 # E-mail
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # para aparecer o email no console/shell
