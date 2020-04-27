@@ -6,13 +6,15 @@ class CongressForm(forms.ModelForm):
 
     class Meta:
         model = Congress
-        fields = ['username', 'name', 'type_congress', 'date_start_subscription',]
+        fields = ['username', 'name', 'type_congress',
+                'date_start_subscription', 'workload',
+            ]
 
 class CongressCreateUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Congress
-        fields = ['username', 'name', 'type_congress']
+        fields = ['username', 'name', 'type_congress', 'workload']
 
 class TypeCongressCreateUpdateForm(forms.ModelForm):
 

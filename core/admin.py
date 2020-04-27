@@ -12,14 +12,14 @@ class CongressAdminSite(admin.ModelAdmin):
     add_form = CongressCreateUpdateForm
     add_fieldsets = (
         (None, {
-            'fields': ('username', 'name', 'type_congress'),
+            'fields': ('username', 'name', 'type_congress', 'workload'),
         }),
     )
 
     form = CongressForm
     fieldsets = (
         (None, {
-            'fields': ('username', 'name', 'type_congress'),
+            'fields': ('username', 'name', 'type_congress', 'workload'),
         }),
         ("Informações", {
             'fields': ('is_closed',),

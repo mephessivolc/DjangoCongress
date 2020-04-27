@@ -85,7 +85,7 @@ class Congress(models.Model):
     date_close_subscription = models.DateTimeField("Encerrar Recebimento de Inscrições", auto_now=False, auto_now_add=False, default=timezone.now)
     date_close_congress = models.DateTimeField("Finalização do evento", auto_now=False, auto_now_add=False, default=timezone.now)
     date_close_awards = models.DateTimeField("Finalizar Inscrições com Premiação", auto_now=False, auto_now_add=False, default=timezone.now)
-
+    workload = models.DecimalField('Carga horária', max_digits=4, decimal_places=2, default=1, help_text='Em horas')
     is_closed = models.BooleanField('Está fechado?', default=False)
 
     class Meta:
