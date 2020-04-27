@@ -31,7 +31,7 @@ class CongressAdminSite(admin.ModelAdmin):
         }),
     )
 
-admin.site.site_header = "Admintração DjangoCongress"
+admin.site.site_header = "Administração DjangoCongress"
 admin.site.register(TypeCongress)
 admin.site.register(Subscriptions)
 admin.site.register(Congress, CongressAdminSite)
