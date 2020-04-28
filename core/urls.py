@@ -16,5 +16,6 @@ urlpatterns = [
     path('api_rest/', include(router.urls)),
     path('imagens/', views.ImagesCongressListView.as_view(), name='images_list'),
     path('imagens/<pk>', views.ImagesCongressDetailView.as_view(), name="images_detail"),
+    path('render/', views.ReportPdf.as_view(), name='report_pdf'),
 
 ]
