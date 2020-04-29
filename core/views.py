@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.views import generic
 from django.contrib.auth.views import LoginView
-from django.contrib.auth import mixins
+from django.contrib.auth import mixins, get_user_model
 
 from .forms import CongressCreateUpdateForm, TypeCongressCreateUpdateForm
 from . import models, pdf
@@ -53,19 +53,19 @@ class ImagesCongressDetailView(LoginView, generic.DetailView):
     model = models.ImagesCongress
     template_name = 'core/images_detail.html'
 
-
+Users = get_user_model()
 class ReportPdf(generic.TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
-        form = models.Subscriptions.objects.all()
-        context['counter'] = [i for i in range(50)]
-        context['filename'] = 'Lista_presenca'
-        context['form'] = form
+        data = Users.objects.all()
+        context['extra_lines'] = 10
+        # context['filename'] = 'Lista_presenca'
+        # context['data'] = data
 
         return context
 
     def render_to_response(self, context, **response_kwargs):
-        file_pdf = pdf.Render(self.get_context_data())
+        file_pdf = pdf.ListRender(**self.get_context_data())
         # return pdf.report(context, data)
         return file_pdf.render_to_response()

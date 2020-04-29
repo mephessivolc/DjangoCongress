@@ -145,7 +145,7 @@ MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'statics')
 MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
-PDF_PATH = os.path.join(STATIC_ROOT, 'pdf/default')
+PDF_PATH = os.path.join(STATIC_ROOT, 'pdf')
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, 'statics'),)
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True

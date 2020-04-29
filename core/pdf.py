@@ -4,55 +4,110 @@ from django.conf import settings
 from django.http import HttpResponse, FileResponse, HttpResponseNotFound
 from django.template.loader import get_template, render_to_string
 
-from pylatex import Document, LongTabu, MultiColumn, Center, NoEscape
+from pylatex import (
+        Document, LongTabu, MultiColumn, Center, NoEscape,
+        StandAloneGraphic, Table, FlushRight, FootnoteText,
+        MultiRow,
+    )
+
 from pylatex.utils import bold
 
-class Render():
+class PdfManager():
+    def __init__(self, **kwargs):
+        self.context = self.get_context(**kwargs)
 
-    def __init__(self, context):
-        self.context = context
+    def get_context(self, **kwargs):
+        context = kwargs
+        if 'path' not in context:
+            context['path'] = "{}/default".format(settings.PDF_PATH)
 
-    def render_to_response(self):
+        if 'full_path' not in context:
+            context['full_path'] = "{}.pdf".format(context['path'])
+
+        if 'extra_lines' not in context:
+            context['extra_lines'] = 0
+
+        if 'data' not in context:
+            context['data'] = []
+
+        if 'filename' not in context:
+            context['filename'] = 'default'
+
+        if 'image_logo' not in context:
+            context['image_logo'] = "{}/default.png".format(settings.MEDIA_ROOT)
+
+        if 'image_institution' not in context:
+            context['image_institution'] = "{}/logo_site.png".format(settings.MEDIA_ROOT)
+
+        return context
+
+    def render_to_file(self):
         geometry_options = {
                 "tmargin": "1cm",
                 "lmargin": "1cm",
                 "rmargin": "1cm",
                 "bmargin": "1cm",
-                "includeheadfoot": True
             }
-        pdf = Document(settings.PDF_PATH, page_numbers=True, geometry_options=geometry_options)
+        pdf = Document(self.context['path'],
+            page_numbers=True,
+            geometry_options=geometry_options)
+
+        with pdf.create(LongTabu("cX[c]c",)) as data_table:
+            data = [
+                StandAloneGraphic(self.context['image_logo'],
+                    image_options=[NoEscape(r'width=50px'), 'keepaspectratio']),
+                'Texto',
+                StandAloneGraphic(self.context['image_institution'],
+                    image_options=[NoEscape(r'width=50px'), 'keepaspectratio']),
+            ]
+            data_table.add_row(data)
+            data_table.add_row("", 'Padraozinho', "")
+            data_table.add_hline()
+
+        with pdf.create(FlushRight()) as data:
+            data.append(FootnoteText('data: 01/01/2020'))
 
         with pdf.create(LongTabu("|c|X[l]|X[l]|")) as data_table:
             data_table.add_hline()
             data_table.add_row([
-                        "#",
-                        "Nome",
-                        "Assinatura",
+                        "",
+                        'Nome',
+                        'Assinatura',
                     ],
                     mapper=[bold]
                 )
+
             data_table.add_hline()
             data_table.end_table_header()
             data_table.add_hline()
             data_table.add_hline()
             cont = 1
-    
-            for i in self.context['form']:
+
+            for i in self.context['data']:
                 data_table.add_row(["{}".format(cont), i.name, ""])
                 data_table.add_hline()
                 cont = cont + 1
 
-        pdf.generate_pdf()
-        filename = "{}.pdf".format(self.context['filename'] or 'default')
+            for i in range(self.context['extra_lines']):
+                data_table.add_row(["{}".format(cont), "", ""])
+                data_table.add_hline()
+                cont = cont + 1
 
-        path = "{}.pdf".format(settings.PDF_PATH)
-        if not path:
+        pdf.generate_pdf()
+
+        if not self.context['full_path']:
             return HttpResponseNotFound('Arquivo não encontrao')
 
-        response = FileResponse(open(path, 'rb'))
+        return self.context['full_path']
+
+class ListRender(PdfManager):
+
+    def render_to_response(self):
+
+        response = FileResponse(open(self.render_to_file(), 'rb'))
 
         # response = HttpResponse(path)
         response['Content_Type'] = 'application/pdf'
-        response['Content-Disposition'] = 'inline; filename={}'.format(filename)
+        response['Content-Disposition'] = 'inline; filename={}.pdf'.format(self.context['filename'])
 
         return response
