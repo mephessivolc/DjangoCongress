@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'qr_code',
     'wkhtmltopdf',
+    'crispy_forms',
 
     # apps #
     'core',
@@ -181,3 +182,5 @@ MESSAGE_TAGS = {
     messages_constants.WARNING: 'warning',
     messages_constants.ERROR: 'danger',
 }
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
