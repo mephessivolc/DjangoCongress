@@ -50,9 +50,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
     'rest_framework',
-    'widget_tweaks',
     'qr_code',
-    'wkhtmltopdf',
     'crispy_forms',
 
     # apps #
