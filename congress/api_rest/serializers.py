@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from core.models import Congress, TypeCongress, Subscriptions
+from congress.models import Congress, TypeCongress, Subscriptions
 
 class CongressSerializers(serializers.ModelSerializer):
 

@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from .serializers import CongressSerializers, TypeCongressSerializers, SubscriptionsSerializers
 
-from core.models import Congress, TypeCongress, Subscriptions
+from congress.models import Congress, TypeCongress, Subscriptions
 
 class CongressViewsets(ModelViewSet):
 

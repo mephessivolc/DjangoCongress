@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-from core.models import Congress
+from congress.models import Congress
 
 Users = get_user_model()
 

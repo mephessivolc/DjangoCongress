@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'crispy_forms',
 
     # apps #
+    'congress',
     'core',
     'minicourses',
     'users',
