@@ -17,5 +17,4 @@ urlpatterns = [
     path('imagens/', views.ImagesListView.as_view(), name='images_list'),
     path('imagens/<pk>', views.ImagesDetailView.as_view(), name="images_detail"),
     path('render/', views.ReportPdf.as_view(), name='report_pdf'),
-
 ]
