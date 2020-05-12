@@ -10,6 +10,7 @@ from django.utils import timezone
 from django.utils.html import format_html
 
 from core.utils import UploadToPathAndRename
+
 # Create your models here.
 Users = get_user_model()
 
@@ -23,15 +24,6 @@ modal_choices = (
     ('TL', 'Tecnólogo'),
     ('T', 'Técnico'),
 )
-
-# def path_and_rename(path):
-#     def wrapper(instance, filename):
-#         # ext = filename.split('.')[-1]
-#         ext = os.path.splitext(filename)[1]
-#         filename = "{}.{}".format(uuid.uuid4(), ext)
-#         return os.path.join(path, filename)
-#
-#     return wrapper
 
 class TypeCongress(models.Model):
     """
@@ -105,7 +97,6 @@ class Congress(models.Model):
     get_pdf_url.short_description = 'Lista Presenca'
 
 class Subscriptions(models.Model):
-
     """
         Inscritos
     """
@@ -123,6 +114,9 @@ class Subscriptions(models.Model):
         return "{} ({})".format(self.user.name, self.congress.name)
 
 class Images(models.Model):
+    """
+        Imagem de Logo, Fundo de Cetificado e Logo de Instituicao 
+    """
     congress = models.OneToOneField(Congress, on_delete=models.CASCADE)
     logo = models.ImageField("Logo", default="default.png", upload_to=UploadToPathAndRename('congress/logo/'))
     institute = models.ImageField("Instituto", default="default.png", upload_to=UploadToPathAndRename('congress/institute/'))
