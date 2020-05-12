@@ -7,6 +7,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.html import format_html
 
 from core.utils import UploadToPathAndRename
 # Create your models here.
@@ -95,23 +96,13 @@ class Congress(models.Model):
     def __str__(self):
         return self.name
 
-class AdminCongress(models.Model):
-    """
-        Cadastro de Sub-Administradores do Congresso. Sub-Administradores sao usuarios que podem atualizar dados do
-        congresso enquanto este permanece em periodo ativo.
-    """
+    def get_date(self):
+        return "{}".format(self.date_start_congress.strftime("%m/%Y"))
+    get_date.short_description = 'Data'
 
-    user = models.ForeignKey(Users, verbose_name='Administrador do Evento', on_delete=models.DO_NOTHING)
-    congress = models.ForeignKey(Congress, verbose_name='Congresso', on_delete=models.CASCADE)
-
-    class Meta:
-        verbose_name = 'Administrador do Evento'
-        verbose_name_plural = "Administradores do Evento"
-        permissions = [('core.congress.change_congress', "Can Change Congress")]
-
-    def __str__(self):
-        return "({}/{}) {}".format(self.congress.username, self.congress.date_close_congress.strftime("%Y"), self.user)
-
+    def get_pdf_url(self):
+        return format_html("<a href={}>pdf</a>".format(reverse('congress:report_list_pdf', kwargs={'slug': self.slug})))
+    get_pdf_url.short_description = 'Lista Presenca'
 
 class Subscriptions(models.Model):
 
@@ -120,6 +111,7 @@ class Subscriptions(models.Model):
     """
     congress = models.ForeignKey(Congress, verbose_name='Congresso', on_delete=models.CASCADE)
     user = models.ForeignKey(Users, verbose_name='Usuario inscrito', on_delete=models.CASCADE)
+    is_adm = models.BooleanField('Administrador do Evento', default=False)
     is_staff = models.BooleanField('Monitor', default=False)
     is_payment = models.BooleanField('Pagamento', default=False)
 

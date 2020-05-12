@@ -1,9 +1,11 @@
 from django.contrib import admin
 
 from django.contrib import admin
+from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 # Register your models here.
 from .models import (TypeCongress, Congress, Subscriptions,
-    Courses, Institute, AdminCongress, Images
+    Courses, Institute, Images
 )
 
 from .forms import CongressCreateUpdateForm, CongressForm
@@ -19,7 +21,7 @@ class CongressAdminSite(admin.ModelAdmin):
     form = CongressForm
     fieldsets = (
         (None, {
-            'fields': ('username', 'name', 'type_congress', 'workload'),
+            'fields': ('slug', 'username', 'name', 'type_congress', 'workload'),
         }),
         ("Informações", {
             'fields': ('is_closed',),
@@ -31,11 +33,16 @@ class CongressAdminSite(admin.ModelAdmin):
         }),
     )
 
+    list_display = ['name', 'get_date', 'get_pdf_url']
+
+class CongressSubscritionSite(admin.ModelAdmin):
+    list_display = ['__str__', 'is_adm',
+        'is_staff', 'is_payment']
+
 admin.site.site_header = "Administração DjangoCongress"
 admin.site.register(TypeCongress)
-admin.site.register(Subscriptions)
+admin.site.register(Subscriptions, CongressSubscritionSite)
 admin.site.register(Congress, CongressAdminSite)
-admin.site.register(AdminCongress)
 admin.site.register(Courses)
 admin.site.register(Institute)
 admin.site.register(Images)

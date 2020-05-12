@@ -11,10 +11,14 @@ router.register(r'evento', CongressViewsets)
 router.register(r'tipo_evento', TypeCongressViewsets)
 router.register(r'inscricao', SubscriptionsViewsets)
 
-app_name = 'core'
+app_name = 'congress'
+pdfpatterns = [
+    path('lista_presenca/<slug:slug>', views.ReportPdf.as_view(), name='report_list_pdf'),
+]
+
 urlpatterns = [
     path('api_rest/', include(router.urls)),
     path('imagens/', views.ImagesListView.as_view(), name='images_list'),
     path('imagens/<pk>', views.ImagesDetailView.as_view(), name="images_detail"),
-    path('render/', views.ReportPdf.as_view(), name='report_pdf'),
+    path('pdf/', include(pdfpatterns)),
 ]
