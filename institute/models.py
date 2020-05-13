@@ -18,8 +18,8 @@ class Institute(models.Model):
         Institutos que tem ou terá relacao com o Congresso, seja para sediar ou para compor instituicoes onde
         inscritos pertencem.
     """
-    username = models.CharField('Sigla da Instituição', max_length=15)
-    name = models.CharField('Nome da Instituição', max_length=100)
+    username = models.CharField('Sigla', max_length=15)
+    name = models.CharField('Nome', max_length=100)
 
     class Meta:
         verbose_name = 'Instituição'
