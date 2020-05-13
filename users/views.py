@@ -16,7 +16,7 @@ class IndexView(TemplateView):
 class CreateUsersView(CreateView):
     model = Users
     form_class = UserAdminCreateForm
-    success_url = reverse_lazy('core:index')
+    success_url = reverse_lazy('index')
     template_name = 'users/create.html'
 
 class LoginUsersView(LoginView):
