@@ -46,14 +46,6 @@ class CongressListView(LoginView, generic.ListView):
 class CongressDetailView(LoginView, generic.DetailView):
     template_name = 'congress/detail.html'
 
-class ImagesListView(LoginView, generic.ListView):
-    model = models.Images
-    template_name = 'congress/images_list.html'
-
-class ImagesDetailView(LoginView, generic.DetailView):
-    model = models.Images
-    template_name = 'congress/images_detail.html'
-
 class ReportPdf(pdf.TablePdfManager):
     filename = 'lista_presenca'
     title = 'Lista de Presença'
