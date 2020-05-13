@@ -17,8 +17,6 @@ pdfpatterns = [
 ]
 
 urlpatterns = [
-    path('api_rest/', include(router.urls)),
-    path('imagens/', views.ImagesListView.as_view(), name='images_list'),
-    path('imagens/<pk>', views.ImagesDetailView.as_view(), name="images_detail"),
+    path('api_rest/', include(router.urls)),    
     path('pdf/', include(pdfpatterns)),
 ]
