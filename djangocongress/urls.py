@@ -24,6 +24,7 @@ import core
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('congresso/', include("congress.urls")),
+    path('contas/', include("users.urls")),
 ]
 
 if settings.DEBUG:
