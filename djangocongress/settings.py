@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     # apps #
     'congress',
     'core',
+    'institute',
     'minicourses',
     'users',
     'shirts',
