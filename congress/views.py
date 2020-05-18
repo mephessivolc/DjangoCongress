@@ -49,5 +49,5 @@ class CongressDetailView(LoginView, generic.DetailView):
 class ReportPdf(pdf.TablePdfManager):
     filename = 'lista_presenca'
     title = 'Lista de Presença'
-    data_list = Users.objects.all().order_by('name')
-    congress_queryset = models.Congress.objects.first()
+    # data_list = Users.objects.all().order_by('name')
+    # congress_queryset = models.Congress.objects.first()
