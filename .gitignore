@@ -8,5 +8,6 @@ devDjangoCongress/
 __pycache__/
 migrations/
 statics/
+static/
 
 .mypy_cache/
