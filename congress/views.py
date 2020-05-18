@@ -46,16 +46,8 @@ class CongressListView(LoginView, generic.ListView):
 class CongressDetailView(LoginView, generic.DetailView):
     template_name = 'congress/detail.html'
 
-class ImagesListView(LoginView, generic.ListView):
-    model = models.Images
-    template_name = 'congress/images_list.html'
-
-class ImagesDetailView(LoginView, generic.DetailView):
-    model = models.Images
-    template_name = 'congress/images_detail.html'
-
 class ReportPdf(pdf.TablePdfManager):
     filename = 'lista_presenca'
     title = 'Lista de Presença'
-    data_list = Users.objects.all().order_by('name')
-    congress_queryset = models.Congress.objects.first()
+    # data_list = Users.objects.all().order_by('name')
+    # congress_queryset = models.Congress.objects.first()

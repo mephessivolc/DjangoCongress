@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     # apps #
     'congress',
     'core',
+    'institute',
     'minicourses',
     'users',
     'shirts',
@@ -95,13 +96,23 @@ WSGI_APPLICATION = 'djangocongress.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
+        'PORT': 5432,
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -140,12 +151,12 @@ USE_THOUSAND_SEPARATOR = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+STATIC_URL = '/staticfiles/'
+MEDIA_URL = '/mediafiles/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'statics')
-MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
-PDF_PATH = os.path.join(STATIC_ROOT, 'pdf')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_ROOT = os.path.join(STATIC_ROOT, 'mediafiles')
+PDF_PATH = os.path.join(STATIC_ROOT, 'pdffiles')
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, 'statics'),)
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
