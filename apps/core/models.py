@@ -12,7 +12,7 @@ class Congress(models.Model):
     class Meta:
         verbose_name = "Evento"
         verbose_name_plural = "Eventos"
-        ordering = ['short_name', 'name']
+        ordering = ['short_name', 'first_day', 'name']
 
     def __str__(self) -> str:
         return f"{self.name}"
